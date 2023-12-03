@@ -1,6 +1,7 @@
 from src.channel import Channel
 
 if __name__ == '__main__':
+    print("moscowpython")
     moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
 
     # получаем значения атрибутов
