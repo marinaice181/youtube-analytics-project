@@ -7,6 +7,7 @@ from googleapiclient.discovery import build
 class Channel:
     """Класс для ютуб-канала"""
     api_key: str = os.getenv('YT_API_KEY')
+    #api_key: str = "AIzaSyDuwkxAFw6xrimqun5ah9HUhJKG-RFkTwE"
     youtube = build('youtube', 'v3', developerKey=api_key)
 
     def __init__(self, channel_id: str) -> None:
@@ -74,3 +75,5 @@ class Channel:
         with open(file_json, 'w', encoding="utf-8") as f:
             f.write(json.dumps(json_data))
 
+moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
+print(moscowpython.api_key)
