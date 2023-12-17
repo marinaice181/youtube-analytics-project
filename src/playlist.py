@@ -9,21 +9,25 @@ class PlayList:
     youtube = build('youtube', 'v3', developerKey=api_key)
 
     def __init__(self, playlist_id):
+        """
+        название плейлиста
+        ссылку на плейлист
+        """
         self.playlist_id = playlist_id
         self.playlist_videos = self.youtube.playlistItems().list(playlistId=playlist_id,
-                                               part='contentDetails,snippet',
-                                               maxResults=50,).execute()
+                                                                 part='contentDetails,snippet',
+                                                                 maxResults=50, ).execute()
         self.channel_id = self.playlist_videos['items'][0]['snippet']['channel_id']
         self.playlists = self.youtube.playlists().list(channelId=self.channel_id,
                                                        part='contentDetails,snippet',
-                                               maxResults=50,).execute()
+                                                       maxResults=50, ).execute()
         for playlist in self.playlists['items']:
             if playlist['id'] == self.playlist_id:
                 self.title = playlist['snippet']['title']
         self.url = f"https://www.youtube.com/playlist?list={self.playlist_id}"
-        self.video_ids:  list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
+        self.video_ids: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
         self.video_response = self.youtube.videos().list(part='contentDetails,statistics',
-                                       id=','.join(self.video_ids)).execute()
+                                                         id=','.join(self.video_ids)).execute()
 
     def __str__(self):
         return f'{self.title}'
