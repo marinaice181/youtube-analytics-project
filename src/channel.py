@@ -58,9 +58,7 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        api_key: str = os.getenv('YT_API_KEY')
-        youtube = build('youtube', 'v3', developerKey=api_key)
-        return youtube
+        return
 
     def to_json(self, file_json):
         json_data = {
