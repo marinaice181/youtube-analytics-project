@@ -17,10 +17,8 @@ class PlayList:
         self.playlist_videos = self.youtube.playlistItems().list(playlistId=playlist_id,
                                                                  part='contentDetails,snippet',
                                                                  maxResults=50, ).execute()
-        self.channel_id = self.playlist_videos['items'][0]['snippet']['channel_id']
-        self.playlists = self.youtube.playlists().list(channelId=self.channel_id,
-                                                       part='contentDetails,snippet',
-                                                       maxResults=50, ).execute()
+
+        self.playlists = self.youtube.playlists().list(id=self.playlist_id, part='snippet', maxResults=50).execute()
         for playlist in self.playlists['items']:
             if playlist['id'] == self.playlist_id:
                 self.title = playlist['snippet']['title']
@@ -51,7 +49,6 @@ class PlayList:
         max_like_count = 0
         url = ""
         for video in self.video_response['items']:
-            if max_like_count < int(video['statistics']['likeCount']):
-                max_like_count = int(video['statistics']['likeCount'])
+            if max_like_count <= int(video['statistics']['likeCount']):
                 url = f"https://www.youtu.be/{video['id']}"
             return url
