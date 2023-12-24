@@ -3,7 +3,9 @@ import os
 
 
 class Video:
-
+    """
+    Класс который инициализируется 'id видео' и 'id плейлиста'
+    """
     def __init__(self, video_id):
         youtube = self.get_service()
         self.__video_id = video_id
