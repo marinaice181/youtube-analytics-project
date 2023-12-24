@@ -34,3 +34,29 @@ class Video:
         api_key = os.getenv('YT_API_KEY')
         return build('youtube', 'v3', developerKey=api_key)
 
+    @property
+    def title(self):
+        return self.__title
+
+    @property
+    def url(self):
+        return self.__url
+
+    @property
+    def view_count(self):
+        return self.__view_count
+
+    @property
+    def like_count(self):
+        return self.__like_count
+
+    @property
+    def comment_count(self):
+        return self.__comment_count
+
+
+class PLVideo(Video):
+
+    def __init__(self, video_id, playlist_id):
+        super().__init__(video_id)
+        self.playlist_id = playlist_id
